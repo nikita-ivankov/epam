@@ -1,0 +1,6 @@
+---
+
+script: change_template.sh
+subroutine: change_template
+begin_patr: {
+end_patr: }
