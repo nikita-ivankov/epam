@@ -5,12 +5,12 @@ END {
 	for (item in count_array)
 		if (item != 10)
 			if (result_type == "y")
-				printf "%-2d %c %2d%c %.1f%c\n", item*10,"-",item*10+9,":",length(count_array[item])/1.01,"%"
+				printf "%-2d %c %2d%c %.1f%c\n", item*10,"-",item*10+9,":",length(count_array[item])/1.99,"%"
 			else
 				printf "%-2d %c %2d%c %3d %-40s\n", item*10,"-",item*10+9,":",length(count_array[item]), count_array[item]
 		else
 			if (result_type == "y")
-				printf "%-3d%c %7.1f%c\n", item*10,":",length(count_array[item])/1.01,"%"
+				printf "%-3d%c %7.1f%c\n", item*10,":",length(count_array[item])/1.99,"%"
 			else
 				printf "%-3d%c %7d %-40s\n", item*10,":",length(count_array[item]), count_array[item]	
 }
