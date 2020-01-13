@@ -64,7 +64,7 @@ do
 			#remove signs of pattern
 			index=$(echo $i | sed 's/[{-}]//g')
 
-			#change / to \/ for futher sed processing
+			#change \,/,& to \/, \\, \& for futher sed processing
 			first=$(echo $i | sed 's/[\/&]/\\&/g')
 			second=$(echo ${!index} | sed 's/[\/&]/\\&/g')
 			#make change
