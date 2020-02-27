@@ -30,9 +30,9 @@ else
 						third_part=$(date -r $file +%F)
 					
 						#if file was moved successfully that make a notice in a log file
-						if mv $file /$TARGETDIR/"${first_part}_${second_part}_${third_part}" 2>/dev/null
+						if mv $file $TARGETDIR/"${first_part}_${second_part}_${third_part}"
 						then
-							echo "$(date +%F-%T) The file $file was successfully moved in $TARGETDIR as ${first_part}_${second_part}_${third_part} " >> log.txt
+							echo "$(date +%F-%T) The file $file was successfully moved in $TARGETDIR as ${first_part}_${second_part}_${third_part} " >> $LOGFILENAME
 						fi
 					fi
 
