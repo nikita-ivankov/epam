@@ -35,7 +35,7 @@ if [[ ! -r "${TEMPLATE_FILE}" ]]; then
 	break;
 fi
 
-touch $RESULT_FILE
+touch $RESULT_FILE && echo > $RESULT_FILE
 
 #If all right go on - read TEMPLATE file line by line
 while read LINE
