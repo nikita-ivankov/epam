@@ -3,7 +3,8 @@
 #Checking existing of config file
 if [[ ! -f "config.cfg" ]] || [[ ! -r "config.cfg" ]]
 then
-	printf "config.cfg is not a file or doesn't exist or isn't readable, please try again.\n";
+	echo "config.cfg is not a file or doesn't exist or isn't readable, please try again." >&2
+
 else
 	SOURCEDIR=$(awk -F "=" '/SOURCEDIR/ {print $2}' config.cfg)
 	TARGETDIR=$(awk -F "=" '/TARGETDIR/ {print $2}' config.cfg)
@@ -12,8 +13,10 @@ else
 	#Checking existing of SOURCEDIR, TARGETDIR directory and existing and availability if LOGFILENAME
 	if [[ ! -d "${SOURCEDIR}" ]] || [[ ! -d "${TARGETDIR}" ]] || [[ ! -f "${LOGFILENAME}" ]] || [[ ! -w "${LOGFILENAME}" ]] 
 	then
-		printf "Some problem with arguments from config file, please try again.\n";
+		echo "Some problem with arguments from config file, please try again." >&2
+		exit 1
 	else
+		touch $LOGFILENAME && echo > $LOGFILENAME
 		while true 
 		do
 			#getting files from SOURCE dir
@@ -30,7 +33,8 @@ else
 						third_part=$(date -r $file +%F)
 					
 						#if file was moved successfully that make a notice in a log file
-						if mv $file $TARGETDIR/"${first_part}_${second_part}_${third_part}"
+						mv $file $TARGETDIR/"${first_part}_${second_part}_${third_part}" 2> /dev/null
+						if [ $? -eq 0 ]
 						then
 							echo "$(date +%F-%T) The file $file was successfully moved in $TARGETDIR as ${first_part}_${second_part}_${third_part} " >> $LOGFILENAME
 						fi

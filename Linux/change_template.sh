@@ -2,10 +2,10 @@ function change_template {
 
 #Checking the number of arguments
 if [[ $# -ne 4 ]]; then
-		printf "You must input two arguments:\
-		\n-t/--template - is a file with template,\
-		\n-r/--result - is a file to output result of script\
-		\nTry againg please.\n"
+		echo "You must input two arguments:
+		-t/--template - is a file with template,
+		-r/--result - is a file to output result of script
+		Try againg please." >&2
 		return 1
 		break
 else
@@ -14,7 +14,7 @@ else
 		case "$1" in
 			-t | --template ) TEMPLATE_FILE="$2"; shift 2;;
 			-r | --result ) RESULT_FILE="$2"; shift 2;;
-			*) printf "You have inputed the wrong argument[s], please try again.\n"
+			*) printf "You have inputed the wrong argument[s], please try again." >&2
 				return 1
 				break;; 
 		esac
@@ -23,32 +23,19 @@ fi
 
 #Checking existing of TEMPLATE file
 if [[ ! -f "${TEMPLATE_FILE}" ]]; then
-	printf "Input ${TEMPLATE_FILE} is not a file or doesn't exist, please try again.\n";
+	echo "Input ${TEMPLATE_FILE} is not a file or doesn't exist, please try again." >&2
 	return 1;
 	break;
 fi
 
 #Checking access to TEMPLATE file
 if [[ ! -r "${TEMPLATE_FILE}" ]]; then
-	printf "Input ${TEMPLATE_FILE} is not readable, please try again.\n";
+	echo "Input ${TEMPLATE_FILE} is not readable, please try again." >&2
 	return 1;
 	break;
 fi
 
-#Checking existing of RESULT file
-if [[ ! -f "${RESULT_FILE}" ]]; then
-	printf "Input ${RESULT_FILE} is not a file or doesn't exist, please try again.\n";
-	return 1;
-	break;
-fi
-
-#Checking access to RESULT file
-if
-	[[ ! -w "${RESULT_FILE}" ]]; then
-	printf "Input ${RESULT_FILE} is not writeable, please try again.\n";
-	return 1;
-	break;
-fi
+touch $RESULT_FILE
 
 #If all right go on - read TEMPLATE file line by line
 while read LINE
