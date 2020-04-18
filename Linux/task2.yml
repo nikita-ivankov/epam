@@ -1,4 +1,0 @@
----
-
-script: move_files.sh
-config: config.cfg
