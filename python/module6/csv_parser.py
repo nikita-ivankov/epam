@@ -1,4 +1,4 @@
-#don't know how store file(data) - in class attribute or reopen file in any time class method start, decided to use first one
+#don't know how to store file(data) - in class attribute or reopen file in any time class method starts, decided to use first one
 
 class CsvParser:
 
