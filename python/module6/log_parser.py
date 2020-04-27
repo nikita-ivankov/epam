@@ -16,8 +16,3 @@ class LogParser:
 			with open(self.file, 'r') as source:
 				for line in re.findall(rf'.+HTTP\/\d.\d. {code} .+', source.read()):
 					destination.write(line + '\n')
-
-# if __name__ == '__main__':
-# 	new = LogParser('access.log')
-# 	#print(new.get_most_common(5))
-# 	new.log_by_http_code('res.txt','200')
