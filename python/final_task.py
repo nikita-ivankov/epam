@@ -15,7 +15,7 @@ def get_amount_of_tags():
         answer_log = input('    wrong input, try again: ')
 
     if answer_log == 'Y' or answer_log == 'yes':
-        logging.basicConfig(filename='log.txt', format='%(asctime)s %(message)s', level=logging.INFO)
+        logging.basicConfig(filename='log.txt', format='%(asctime)s %(message)s', level=logging.WARNING)
 
     try:
         request = requests.get(url, headers={'Accept-Language': 'En-us'})
@@ -25,7 +25,7 @@ def get_amount_of_tags():
         print(f'{url}:\ngeneral tags: {len(tags)}')
         print("\n".join(f"{str(i)}: {str(j)}" for i,j in Counter(tags).most_common()))
 
-        logging.info(f'{url} {len(tags)}{dict(Counter(tags).most_common())}')
+        logging.warning(f'{url} {len(tags)}{dict(Counter(tags).most_common())}')
 
         answer_s3 = input('Would you like to copy log into a bucket?(yes(Y)/no(N)): ')
         while answer_s3 not in ['yes', 'no', 'Y', 'N']:
@@ -38,7 +38,6 @@ def get_amount_of_tags():
                 s3.upload_file('log.txt', bucket_name, 'logs.txt')
             except Exception as err:
                 print(f'OOPS, we have an error:\n  "{err}"')
-
 
     except Exception as err:
         print(f'OOPS, we have an error:\n  "{err}"')
