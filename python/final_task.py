@@ -45,4 +45,4 @@ def get_amount_of_tags():
 
 
 if __name__ == '__main__':
-    get_amount_of_tags()
+    pass
