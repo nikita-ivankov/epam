@@ -17,7 +17,7 @@ def get_amount_of_tags():
         tags = [tag.name for tag in soup.find_all()]
 
         print(f'{url}:\ngeneral tags: {len(tags)}')
-        print("\n".join(f"{str(i)}: {str(j)}" for i,j in Counter(tags).most_common()))
+        print("\n".join(f"{str(item)}: {str(value)}" for item,value in Counter(tags).most_common()))
 
         answer_log = input('Would you like to save information in log file(logs.txt)?(yes(Y)/no(N)): ')
         while answer_log not in ['yes', 'no', 'Y', 'N']:
