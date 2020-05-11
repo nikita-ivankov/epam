@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
-import requests, os, re, logging, boto3
+import requests, os, re, boto3
+from datetime import datetime
 from collections import Counter
 
 def get_amount_of_tags():
@@ -10,13 +11,6 @@ def get_amount_of_tags():
     while not re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+] |[!*\(\), ]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', url):
         url = input(f"  You've inputed not URL, try again: ")
 
-    answer_log = input('Would you like to save information in log file(logs.txt)?(yes(Y)/no(N)): ')
-    while answer_log not in ['yes', 'no', 'Y', 'N']:
-        answer_log = input('    wrong input, try again: ')
-
-    if answer_log == 'Y' or answer_log == 'yes':
-        logging.basicConfig(filename='log.txt', format='%(asctime)s %(message)s', level=logging.WARNING)
-
     try:
         request = requests.get(url, headers={'Accept-Language': 'En-us'})
         soup = BeautifulSoup(request.text, 'lxml')
@@ -25,7 +19,13 @@ def get_amount_of_tags():
         print(f'{url}:\ngeneral tags: {len(tags)}')
         print("\n".join(f"{str(i)}: {str(j)}" for i,j in Counter(tags).most_common()))
 
-        logging.warning(f'{url} {len(tags)}{dict(Counter(tags).most_common())}')
+        answer_log = input('Would you like to save information in log file(logs.txt)?(yes(Y)/no(N)): ')
+        while answer_log not in ['yes', 'no', 'Y', 'N']:
+            answer_log = input('    wrong input, try again: ')
+
+        if answer_log == 'Y' or answer_log == 'yes':
+            with open('logs.txt', 'a') as log_file:
+                log_file.write(f'{datetime.today().strftime("%Y/%m/%d %H:%M")} {url} {len(tags)}{dict(Counter(tags).most_common())}\n')
 
         answer_s3 = input('Would you like to copy log into a bucket?(yes(Y)/no(N)): ')
         while answer_s3 not in ['yes', 'no', 'Y', 'N']:
