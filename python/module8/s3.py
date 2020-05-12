@@ -22,5 +22,5 @@ def copy_to_bucket(input_buckets, output_bucket):
             print('  Completed')
 
 if __name__ == "__main__":
-    copy_to_bucket(['ivankov2020input',	'ivankov2020output0905'],'ivankov2020output09')
+    pass
 

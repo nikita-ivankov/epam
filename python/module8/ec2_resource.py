@@ -27,8 +27,8 @@ def change_instance_state(region, current_state, action):
             else:
                 print(f"State of the instance {instance.id} is {instance.state['Name']} but you inputed unknown action....")
         else:
-            print(f"State of the instance {instance.id} is {instance.state['Name']}, not any action required")
+            print(f"State of the instance {instance.id} is {instance.state['Name']}, not additional action required")
 
 
 if __name__ == '__main__':
-    change_instance_state('us-east-1', 'running', 'stop')
+    pass
