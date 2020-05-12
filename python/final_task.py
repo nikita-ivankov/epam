@@ -12,7 +12,7 @@ def get_amount_of_tags():
         url = input(f"  You've inputed not URL, try again: ")
 
     try:
-        request = requests.get(url, headers={'Accept-Language': 'En-us'})
+        request = requests.get(url)
         soup = BeautifulSoup(request.text, 'lxml')
         tags = [tag.name for tag in soup.find_all()]
 
@@ -35,7 +35,7 @@ def get_amount_of_tags():
             bucket_name = input('What is the name of the bucket? ')
             s3 = boto3.client('s3')
             try:
-                s3.upload_file('log.txt', bucket_name, 'logs.txt')
+                s3.upload_file('logs.txt', bucket_name, 'logs.txt')
             except Exception as err:
                 print(f'OOPS, we have an error:\n  "{err}"')
 
@@ -45,4 +45,4 @@ def get_amount_of_tags():
 
 
 if __name__ == '__main__':
-    pass
+    get_amount_of_tags()
